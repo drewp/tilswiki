@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-
+gem 'bundler', '1.0.1'
 gem 'rails', '3.0.1'
 
 gem 'haml', '3.0.22'
@@ -8,9 +8,9 @@ gem 'andand'
 
 gem 'rmagick', :require => 'RMagick'
 
-gem 'dm-rails',             '~> 1.0.3'
+gem 'dm-rails',             '~> 1.2.0'
 
-DM_VERSION = '~> 1.0.0'
+DM_VERSION = '~> 1.2.0'
 gem 'dm-sqlite-adapter',    DM_VERSION
 gem 'dm-migrations',        DM_VERSION
 gem 'dm-types',             DM_VERSION
@@ -21,9 +21,11 @@ gem 'dm-aggregates',        DM_VERSION
 gem 'dm-timestamps',        DM_VERSION
 gem 'dm-observer',          DM_VERSION
 
+#gem 'actionpack', '3.2.6'
+#gem 'activesupport', '3.2.6'
 
 # Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+#gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 
 # Use unicorn as the web server
