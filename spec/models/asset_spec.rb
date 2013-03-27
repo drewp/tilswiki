@@ -12,7 +12,7 @@ describe Asset, "creation from uploaded tempfile" do
     @page = 'asset_spec'
     @storage_dir = Asset.storage_dir(@page)
 
-    FileUtils.cp(Merb.root / 'spec' / 'files' / 'test.jpg', '/tmp/asset_spec.jpg')
+    FileUtils.cp(Rails.root / 'spec' / 'files' / 'test.jpg', '/tmp/asset_spec.jpg')
     @ratio = 2048 / 1536.0
 
     @file = {
