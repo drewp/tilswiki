@@ -1,5 +1,12 @@
 require File.join( File.dirname(__FILE__), '..', "spec_helper" )
 
+describe Asset, "class methods" do
+  it 'should provide the storage dir when provided the page' do
+    Asset.should respond_to(:storage_dir)
+    Asset.storage_dir('asset_spec').should == Rails.root.join("public", "assets", 'asset_spec')
+  end
+end
+
 describe Asset, "creation from uploaded tempfile" do
   before do
     @page = 'asset_spec'
@@ -57,7 +64,7 @@ describe Asset, "creation from uploaded tempfile" do
   it "should create version called half" do
     File.exists?(@storage_dir / 'panzer.half.jpg').should be_true
   end
-  
+
   it "should make half version half the width of the content area" do
     Magick::Image.read(@storage_dir / 'panzer.half.jpg').first.columns.should == 350
   end
@@ -71,14 +78,14 @@ describe Asset, "creation from uploaded tempfile" do
   it "should create version called full" do
     File.exists?(@storage_dir / 'panzer.full.jpg').should be_true
   end
-  
+
   it "should make full version the width of the content area" do
     Magick::Image.read(@storage_dir / 'panzer.full.jpg').first.columns.should == 700
   end
 
   it "keeps aspect ratio of full version" do
     @full = Magick::Image.read(@storage_dir / 'panzer.full.jpg').first
-      
+
     (@full.columns.to_f / @full.rows).should be_close(@ratio, 0.01)
   end
 end

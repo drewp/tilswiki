@@ -7,19 +7,23 @@ class Asset
     asset.filename = file.original_filename
 
     dir = asset.storage_dir
-    
+
     FileUtils.mkdir(dir) unless File.exists?(dir)
-    
+
     FileUtils.mv(file.path, dir.join(asset.filename))
     asset.create_versions!
 
     return asset
   end
-  
+
   def self.delete_all(page)
     FileUtils.rm_rf(storage_dir(page))
   end
-  
+
+  def self.storage_dir(page)
+    Rails.root.join("public", "assets", page)
+  end
+
   def initialize(page)
     @page = page
   end
@@ -43,7 +47,7 @@ class Asset
         nil
       end
     end.compact
-    
+
     image = Magick::Image.read("#{storage_dir}/#{basename}.#{extension}").first
     versions << ['original', "/assets/#{@page}/#{basename}.#{extension}", image.columns, image.rows]
   end
