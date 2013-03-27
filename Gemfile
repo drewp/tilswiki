@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
-gem 'bundler', '1.0.1'
-gem 'rails', '3.0.1'
+gem 'bundler'#, '1.0.1'
+gem 'rails', '3.0.20'
 
 gem 'haml', '3.0.22'
 
