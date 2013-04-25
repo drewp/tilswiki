@@ -7,6 +7,30 @@ describe Asset, "class methods" do
   end
 end
 
+describe Asset, "with a valid instance" do
+  before :each do
+    @page = 'valid_instance'
+    @asset = Asset.new(@page)
+    @asset.filename = 'myfile.jpg'
+  end
+
+  it "should use original file name as name" do
+    @asset.name.should == @asset.filename
+  end
+
+  it "should know its version name for a given version" do
+    @asset.version_name('half').should == [@asset.basename, 'half', @asset.extension].join('.')
+  end
+
+  it "should know its page asset directory" do
+    @asset.page_asset_dir.should == File.join('/assets', @asset.page)
+  end
+
+  it "should compute its URL" do
+    @asset.url(:half).should == File.join("/assets", @asset.page, @asset.version_name(:half))
+  end
+end
+
 describe Asset, "creation from uploaded tempfile" do
   before do
     @page = 'asset_spec'
@@ -43,22 +67,6 @@ describe Asset, "creation from uploaded tempfile" do
       '/assets/asset_spec/panzer.full.jpg',
       '/assets/asset_spec/panzer.jpg'
     ]
-  end
-
-  it "should use original file name as name" do
-    @asset.name.should == 'panzer.jpg'
-  end
-
-  it "should know its version name for a given version" do
-    @asset.version_name('half').should == [@asset.basename, 'half', @asset.suffix].join('.')
-  end
-
-  it "should know its page asset directory" do
-    @asset.page_asset_dir.should == File.join('/assets', @asset.page)
-  end
-
-  it "should compute its URL" do
-    @asset.url(:half).should == "/assets/asset_spec/panzer.half.jpg"
   end
 
   it "should create a thumb version" do
