@@ -67,7 +67,7 @@ class Asset
   end
 
   def storage_dir
-    self.class.storage_dir(@page)
+    self.class.storage_dir(page)
   end
 
   def page_asset_dir
