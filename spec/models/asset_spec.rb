@@ -12,15 +12,17 @@ describe Asset, "creation from uploaded tempfile" do
     @page = 'asset_spec'
     @storage_dir = Asset.storage_dir(@page)
 
-    FileUtils.cp(Rails.root / 'spec' / 'files' / 'test.jpg', '/tmp/asset_spec.jpg')
+    FileUtils.cp(Rails.root.join('spec', 'files', 'test.jpg'), '/tmp/panzer.jpg')
     @ratio = 2048 / 1536.0
 
-    @file = {
-      "size"         => 877838,
-      "content_type" => "image/jpeg",
-      "filename"     => "panzer.jpg",
-      "tempfile"     => File.open('/tmp/asset_spec.jpg')
-    }
+    # @file = {
+    #   "size"         => 877838,
+    #   "content_type" => "image/jpeg",
+    #   "filename"     => "panzer.jpg",
+    #   "tempfile"     => File.open('/tmp/asset_spec.jpg')
+    # }
+
+    @file = Rack::Test::UploadedFile.new('/tmp/panzer.jpg', 'image/jpeg', true)
 
     @asset = Asset.create(@page, @file)
   end
