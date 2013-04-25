@@ -85,6 +85,6 @@ class Asset
   end
 
   def version_name(version)
-    "#{basename}.#{version}.#{extension}"
+    version.to_s == 'original' ? filename : "#{basename}.#{version}.#{extension}"
   end
 end

@@ -22,6 +22,10 @@ describe Asset, "with a valid instance" do
     @asset.version_name('half').should == [@asset.basename, 'half', @asset.extension].join('.')
   end
 
+  it "should return the filename as the 'original' version" do
+    @asset.version_name(:original).should == @asset.filename
+  end
+
   it "should know its page asset directory" do
     @asset.page_asset_path.should == File.join('/assets', @asset.page)
   end
