@@ -37,7 +37,7 @@ class Asset
   def versions
     versions = VERSIONS.map(&:first).map do |version|
       # file = "#{storage_dir}/#{basename}.#{version}.#{extension}"
-      file = File.join(storage_dir, version_name(version))
+      file = storage_path(version)
 
       if File.exist?(file)
         image = Magick::Image.read(file).first
