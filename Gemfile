@@ -63,7 +63,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'cucumber'
   gem 'launchy'    # So you can do Then show me the page
-  gem 'simplecov'
+  gem 'simplecov', :require => false
 end
 
 group :test do
