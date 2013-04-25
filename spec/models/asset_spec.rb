@@ -84,7 +84,7 @@ describe Asset, "creation from uploaded tempfile" do
   it "should resize thumb and keep aspect ratio" do
     @thumb = Magick::Image.read(@asset.storage_path(:thumb)).first
 
-    (@thumb.columns.to_f / @thumb.rows).should be_close(@ratio, 0.01)
+    (@thumb.columns.to_f / @thumb.rows).should be_within(0.01).of(@ratio)
   end
 
   it "should create version called half" do
@@ -98,7 +98,7 @@ describe Asset, "creation from uploaded tempfile" do
   it "keeps aspect ratio of half version" do
     @half = Magick::Image.read(@asset.storage_path(:half)).first
 
-    (@half.columns.to_f / @half.rows).should be_close(@ratio, 0.01)
+    (@half.columns.to_f / @half.rows).should be_within(0.01).of(@ratio)
   end
 
   it "should create version called full" do
@@ -112,6 +112,6 @@ describe Asset, "creation from uploaded tempfile" do
   it "keeps aspect ratio of full version" do
     @full = Magick::Image.read(@asset.storage_path(:full)).first
 
-    (@full.columns.to_f / @full.rows).should be_close(@ratio, 0.01)
+    (@full.columns.to_f / @full.rows).should be_within(0.01).of(@ratio)
   end
 end
