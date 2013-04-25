@@ -36,7 +36,6 @@ class Asset
   # Array with one array for each version: [version, path, width, height]
   def versions
     versions = VERSIONS.map(&:first).map do |version|
-      # file = "#{storage_dir}/#{basename}.#{version}.#{extension}"
       file = storage_path(version)
 
       if File.exist?(file)
@@ -72,13 +71,11 @@ class Asset
   end
 
   def extension
-    # TODO: delegate to some File method
-    @filename =~ /\.(.+)$/ && $1
+    File.extname(filename)[1..-1]
   end
 
   def basename
-    # TODO: use File.basename
-    @filename =~ /^(.+)\./ && $1
+    File.basename(filename, '.*')
   end
 
   def version_name(version)
