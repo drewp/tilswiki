@@ -10,7 +10,7 @@ class Asset
 
     FileUtils.mkdir(dir) unless File.exists?(dir)
 
-    FileUtils.mv(file.path, dir.join(asset.filename))
+    FileUtils.mv(file.path, File.join(dir, asset.filename))
     asset.create_versions!
 
     return asset
