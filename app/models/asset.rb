@@ -3,8 +3,7 @@ class Asset
   attr_accessor :filename, :page
 
   def self.create(page, file)
-    asset = Asset.new(page)
-    asset.filename = file.original_filename
+    asset = Asset.new(page, file.original_filename)
 
     dir = asset.storage_dir
 
@@ -24,8 +23,9 @@ class Asset
     Rails.root.join("public", "assets", page)
   end
 
-  def initialize(page)
+  def initialize(page, filename = nil)
     @page = page
+    @filename = filename
   end
 
   def create_versions!
