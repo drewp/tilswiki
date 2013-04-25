@@ -50,7 +50,7 @@ class Asset
       end
     end.compact
 
-    image = Magick::Image.read("#{storage_dir}/#{basename}.#{extension}").first
+    image = original
     versions << ['original', url(:original), image.columns, image.rows]
   end
 
