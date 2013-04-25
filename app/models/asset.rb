@@ -44,14 +44,14 @@ class Asset
 
       if File.exist?(file)
         image = Magick::Image.read(file).first
-        [version, "#{page_asset_path}/#{version_name(version)}", image.columns, image.rows]
+        [version, url(version), image.columns, image.rows]
       else
         nil
       end
     end.compact
 
     image = Magick::Image.read("#{storage_dir}/#{basename}.#{extension}").first
-    versions << ['original', "#{page_asset_path}/#{basename}.#{extension}", image.columns, image.rows]
+    versions << ['original', url(:original), image.columns, image.rows]
   end
 
   def name
