@@ -39,10 +39,12 @@ class Asset
   # Array with one array for each version: [version, path, width, height]
   def versions
     versions = VERSIONS.map(&:first).map do |version|
-      file = "#{storage_dir}/#{basename}.#{version}.#{extension}"
+      # file = "#{storage_dir}/#{basename}.#{version}.#{extension}"
+      file = File.join(storage_dir, version_name(version))
+
       if File.exist?(file)
         image = Magick::Image.read(file).first
-        [version, "/assets/#{@page}/#{basename}.#{version}.#{extension}", image.columns, image.rows]
+        [version, "/assets/#{@page}/#{version_name(version)}", image.columns, image.rows]
       else
         nil
       end
