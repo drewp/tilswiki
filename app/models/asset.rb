@@ -44,14 +44,14 @@ class Asset
 
       if File.exist?(file)
         image = Magick::Image.read(file).first
-        [version, "/assets/#{@page}/#{version_name(version)}", image.columns, image.rows]
+        [version, "#{page_asset_dir}/#{version_name(version)}", image.columns, image.rows]
       else
         nil
       end
     end.compact
 
     image = Magick::Image.read("#{storage_dir}/#{basename}.#{extension}").first
-    versions << ['original', "/assets/#{@page}/#{basename}.#{extension}", image.columns, image.rows]
+    versions << ['original', "#{page_asset_dir}/#{basename}.#{extension}", image.columns, image.rows]
   end
 
   def name
@@ -59,7 +59,7 @@ class Asset
   end
 
   def url(version)
-    "/assets/#{@page}/#{basename}.#{version.to_s}.#{extension}"
+    "#{page_asset_dir}/#{basename}.#{version.to_s}.#{extension}"
   end
 
   def original
@@ -68,6 +68,10 @@ class Asset
 
   def storage_dir
     self.class.storage_dir(@page)
+  end
+
+  def page_asset_dir
+    File.join('', 'assets', page)
   end
 
   def extension
