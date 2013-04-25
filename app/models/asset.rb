@@ -65,7 +65,7 @@ class Asset
   end
 
   def storage_dir
-    Rails.root.join("public", "assets", @page)
+    self.class.storage_dir(@page)
   end
 
   def extension
