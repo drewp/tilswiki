@@ -5,11 +5,8 @@ class Asset
   def self.create(page, file)
     asset = Asset.new(page, file.original_filename)
 
-    dir = asset.storage_dir
-
-    FileUtils.mkdir(dir) unless File.exists?(dir)
-
-    FileUtils.mv(file.path, File.join(dir, asset.filename))
+    Dir.mkdir(asset.storage_dir) unless Dir.exists?(asset.storage_dir)
+    FileUtils.mv(file.path, asset.storage_path(:original))
     asset.create_versions!
 
     return asset
