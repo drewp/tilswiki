@@ -31,7 +31,7 @@ class Asset
   def create_versions!
     VERSIONS.each do |version, geometry|
       original.change_geometry(geometry) do |x, y, img|
-        img.scale(x, y).write(storage_dir / version_name(version))
+        img.scale(x, y).write(storage_path(version))
       end
     end
   end
@@ -63,7 +63,7 @@ class Asset
   end
 
   def original
-    @original ||= Magick::Image.read(storage_dir / @filename).first
+    @original ||= Magick::Image.read(storage_path(:original)).first
   end
 
   def storage_dir
@@ -86,5 +86,9 @@ class Asset
 
   def version_name(version)
     version.to_s == 'original' ? filename : "#{basename}.#{version}.#{extension}"
+  end
+
+  def storage_path(version)
+    File.join(storage_dir, version_name(version))
   end
 end

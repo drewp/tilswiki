@@ -33,6 +33,10 @@ describe Asset, "with a valid instance" do
   it "should compute its URL" do
     @asset.url(:half).should == ["/assets", @asset.page, @asset.version_name(:half)].join('/')
   end
+
+  it "should know the path to a version's storage" do
+    @asset.storage_path(:thumb).should == File.join(@asset.storage_dir, @asset.version_name(:thumb))
+  end
 end
 
 describe Asset, "creation from uploaded tempfile" do
