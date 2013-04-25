@@ -69,10 +69,12 @@ class Asset
   end
 
   def extension
+    # TODO: delegate to some File method
     @filename =~ /\.(.+)$/ && $1
   end
 
   def basename
+    # TODO: use File.basename
     @filename =~ /^(.+)\./ && $1
   end
 
