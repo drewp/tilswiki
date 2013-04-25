@@ -23,7 +23,7 @@ describe Asset, "with a valid instance" do
   end
 
   it "should know its page asset directory" do
-    @asset.page_asset_dir.should == File.join('/assets', @asset.page)
+    @asset.page_asset_path.should == File.join('/assets', @asset.page)
   end
 
   it "should compute its URL" do
