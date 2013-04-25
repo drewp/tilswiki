@@ -49,6 +49,14 @@ describe Asset, "creation from uploaded tempfile" do
     @asset.name.should == 'panzer.jpg'
   end
 
+  it "should know its version name for a given version" do
+    @asset.version_name('half').should == [@asset.basename, 'half', @asset.suffix].join('.')
+  end
+
+  it "should know its page asset directory" do
+    @asset.page_asset_dir.should == File.join('/assets', @asset.page)
+  end
+
   it "should compute its URL" do
     @asset.url(:half).should == "/assets/asset_spec/panzer.half.jpg"
   end
