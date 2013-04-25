@@ -27,7 +27,7 @@ describe Asset, "with a valid instance" do
   end
 
   it "should compute its URL" do
-    @asset.url(:half).should == File.join("/assets", @asset.page, @asset.version_name(:half))
+    @asset.url(:half).should == ["/assets", @asset.page, @asset.version_name(:half)].join('/')
   end
 end
 
